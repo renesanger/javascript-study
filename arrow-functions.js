@@ -18,7 +18,7 @@ alert(double(3));
 
 //FUNCTION 3 - SQUARE
 let square = function (a) {
-  return a^2;
+  return a**2;
 }
 let square = a => a^2;
 alert(square(3));
