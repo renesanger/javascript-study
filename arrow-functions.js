@@ -56,3 +56,26 @@ const person = makePerson("Rene", 27)
 const numbers = [1, 2, 3, 4, 5];
 const doubled = numbers.map(function(n) {return n * 2});
 const doubled = numbers.map((n)=>{return n*2});
+
+//FUNCTION 8 - CALLBACK INSIDE SETTIMEOUT
+setTimeout(function(){
+  console.log("hello");
+  },2000);
+
+setTimeout(() => {console.log("hello")}, 2000);
+
+//FUNCTION 9 - ARRAY FILTER
+const scores = [39,96,75,88,100];
+scores.filter(function(score){
+  return score<60
+  });
+scores.filter((score) => { return score < 60; });
+
+//FUNCTION 10 - CHAINED ARRAY METHODS
+const result = [1,2,3,4,5].filter(function(n){return n % 2 != 0 }).map(function(n){return n*10});
+const result = [1,2,3,4,5].filter((n) => {return n % 2 != 0 }).map((n) => {return n * 10});
+alert(result)
+
+
+
+
