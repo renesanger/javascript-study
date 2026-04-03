@@ -29,6 +29,7 @@ setTimeout(() => {
 
 /*
   Instead of your code waiting for your function to run, you hand off a callback function and say run this when you are done
+  This is what makes Javascript non blocking
 */
 
 
