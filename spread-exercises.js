@@ -26,3 +26,18 @@ const updatedArtists = { ...artist, verified: true };
 const nums = [3 ,7, 2, 9, 1];
 const biggest = Math.max(...nums);
 
+
+
+/*
+  Without spread:
+    const setlist = [first, middle, last];
+    // → [ ["intro"], ["verse", "chorus"], ["outro"] ]
+    
+    You get an array of arrays — 3 nested elements, each still wrapped in their own [].
+  With spread:
+    const setlist = [...first, ...middle, ...last];
+    // → ["intro", "verse", "chorus", "outro"]
+    
+    The ... unpacks each array, pouring its individual items into the new one — a single flat array of 4 strings
+*/
+
