@@ -2,7 +2,7 @@ async function fetchLandmarks() {
   const params = new URLSearchParams({
     $limit: 150,
     $where: "lm_type='Individual Landmark'",
-    // $select: "lm_name,lm_type",
+    $select: "lm_name,boroughid,lm_type,desdate,desig_addr,lp_number,the_geom",
     $order: "lm_name ASC",
   });
 
@@ -26,7 +26,11 @@ async function fetchLandmarks() {
 
 async function main() {
   const data = await fetchLandmarks();
-  console.log(data);
+  for(const landmark of data){
+    const p = document.createElement('p');
+    p.innerHTML = landmark.lm_name;
+    document.getElementById("body").appendChild(p);
+  }
 }
 
 main();
