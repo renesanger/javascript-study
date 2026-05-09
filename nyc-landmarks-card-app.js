@@ -1,3 +1,7 @@
+const BOROUGH_MAP = {
+  MN: "Maanhattan", BK: "Brooklyn", BX: "Bronx", QN: "Queens", SI: "Staten Island"
+};
+
 async function fetchLandmarks() {
   const params = new URLSearchParams({
     $limit: 150,
@@ -24,13 +28,28 @@ async function fetchLandmarks() {
   }
 }
 
+function landmarkCard({lm_name:name,boroughid,lm_type:type,desdate,desig_addr,lp_number,the_geom}) {
+  const borough = BOROUGH_MAP[boroughid] ?? boroughid;
+  const year = desdate?.slice(0,4) ?? "unknown";
+  const [lon,lat] = the_geom?.coordinates ?? [null,null];
+  return `
+  <div class="card">
+    <h2>${name}</h2>
+    <div>${borough}</div>
+    <div>${type}</div>
+    <div>${year}</div>
+    <div>${desig_addr}</div>
+    <div>${lp_number}</div>
+    <div>${lon}</div>
+    <div>${lat}</div>
+  </div>
+  `;
+}
+
 async function main() {
   const data = await fetchLandmarks();
-  for(const landmark of data){
-    const p = document.createElement('p');
-    p.innerHTML = landmark.lm_name;
-    document.getElementById("body").appendChild(p);
-  }
+
+  document.getElementById("body").innerHTML = data.map( landmark => landmarkCard(landmark)).join("")
 }
 
 main();
