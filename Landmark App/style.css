@@ -3,7 +3,16 @@
   border: 0.5px solid #e0e0e0;
   border-radius: 12px;
   overflow: hidden;       /* keeps the top bar clipped inside the rounded corners */
-  max-width: 340px;
+  /* max-width: 340px; */
+  flex: 1 1 280px;
+  max-width: 400px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 1rem;
 }
 
 .card-top {
@@ -82,4 +91,18 @@
   background: #f5f5f5;
   border: 0.5px solid #e0e0e0;
   color: #555;
+}
+
+#search {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 8px;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+#search:focus {
+  border-color: #185FA5;
 }
