@@ -1,6 +1,30 @@
 const BOROUGH_MAP = {
-  MN: "Maanhattan", BK: "Brooklyn", BX: "Bronx", QN: "Queens", SI: "Staten Island"
+  MN: "Manhattan", BK: "Brooklyn", BX: "Bronx", QN: "Queens", SI: "Staten Island"
 };
+
+let allLandmarks = [];  // store fetched data globally
+
+function renderCards(data) {
+  document.getElementById("card-grid").innerHTML = 
+    data.map(landmark => landmarkCard(landmark)).join("");
+}
+
+
+function filterCards(query) {
+  const q = query.toLowerCase().trim();
+
+  const filtered = allLandmarks.filter(({ lm_name, boroughid, desig_addr }) => {
+    return (
+      lm_name?.toLowerCase().includes(q) ||
+      boroughid?.toLowerCase().includes(q) ||
+      desig_addr?.toLowerCase().includes(q)
+    );
+  });
+
+  renderCards(filtered);
+}
+
+
 
 async function fetchLandmarks() {
   const params = new URLSearchParams({
@@ -51,7 +75,7 @@ function landmarkCard({lm_name:name,boroughid,lm_type:type,desdate,desig_addr,lp
 
       <div class="card-row">
         <i class="ti ti-map-pin"></i>
-        <soan>${desig_addr}</span>
+        <span>${desig_addr}</span>
       </div>
 
       ${lon && lat ? `
@@ -68,12 +92,17 @@ function landmarkCard({lm_name:name,boroughid,lm_type:type,desdate,desig_addr,lp
 }
 
 async function main() {
-  const data = await fetchLandmarks();
+  allLandmarks = await fetchLandmarks();
 
-  document.getElementById("body").innerHTML = data.map( landmark => landmarkCard(landmark)).join("")
+ renderCards(allLandmarks);
+
+document.getElementById("search").addEventListener("input", (e) => {
+    filterCards(e.target.value);
+  });
 }
 
-main();
 
+
+main();
 
 
